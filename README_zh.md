@@ -10,12 +10,12 @@
 ## 安装
 
 ### Windows
-1. 从 [Releases](https://github.com/lawgk/ntf-cli/releases) 下载 `ntf.exe`
+1. 从 [Releases](https://github.com/LawrenceGK/ntf-cli/releases) 下载 `ntf.exe`
 2. 将程序所在目录添加到系统 PATH
 
 ### Linux
 方式一：从发布版本安装（推荐）
-1. 从 [Releases](https://github.com/lawgk/ntf-cli/releases) 页面下载最新的 `ntf` 二进制文件
+1. 从 [Releases](https://github.com/LawrenceGK/ntf-cli/releases) 页面下载最新的 `ntf` 二进制文件
 2. 将二进制文件移动到 `/usr/local/bin` 目录下，并重命名为 `ntf`：
    ```bash
    sudo mv ntf-cli /usr/local/bin/ntf

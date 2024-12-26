@@ -10,12 +10,12 @@ A simple command-line tool that wraps the ntfy client CLI tool to simplify the m
 ## Installation
 
 ### Windows
-1. Download `ntf.exe` from [Releases](https://github.com/lawgk/ntf-cli/releases)
+1. Download `ntf.exe` from [Releases](https://github.com/LawrenceGK/ntf-cli/releases)
 2. Add the binary location to your system PATH
 
 ### Linux
 Option 1: Download from releases (Recommended)
-1. Download the latest `ntf` binary from [Releases](https://github.com/lawgk/ntf-cli/releases)
+1. Download the latest `ntf` binary from [Releases](https://github.com/LawrenceGK/ntf-cli/releases)
 2. Move the binary to `/usr/local/bin` and rename it to `ntf`:
    ```bash
    sudo mv ntf-cli /usr/local/bin/ntf
