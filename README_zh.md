@@ -1,32 +1,48 @@
-
 # ntf-cli
 
 中文 | [English](README.md)
 
-ntf-cli 是一个简单的命令行工具，封装了 ntfy 客户端命令行工具，旨在简化消息发送的过程。该工具支持在 Windows 和 Linux 平台上运行。
+一个简单的命令行工具，封装了 ntfy 客户端以简化消息发送流程。
 
-## 特性
-
-- 配置默认主题和默认消息
-- 通过简单的命令行参数发送消息
-- 支持丰富的消息选项：
-  - 延迟发送 (--in)
-  - 消息标题 (--title)
-  - 消息优先级 (--priority)
-  - 消息标签 (--tags)
-- 支持自定义主题和消息内容
+## 前置要求
+- 安装 [ntfy 客户端](https://docs.ntfy.sh/install/) 并确保可在命令行中使用
 
 ## 安装
 
+### Windows
+1. 从 [Releases](https://github.com/lawgk/ntf-cli/releases) 下载 `ntf.exe`
+2. 将程序所在目录添加到系统 PATH
+
+### Linux
+方式一：从发布版本安装（推荐）
+1. 从 [Releases](https://github.com/lawgk/ntf-cli/releases) 页面下载最新的 `ntf` 二进制文件
+2. 将二进制文件移动到 `/usr/local/bin` 目录下，并重命名为 `ntf`：
+   ```bash
+   sudo mv ntf-cli /usr/local/bin/ntf
+   ```
+3. 确保二进制文件具有执行权限：
+   ```bash
+   sudo chmod +x /usr/local/bin/ntf
+   ```
+
+方式二：从源码构建
 1. 确保已安装 Go 语言环境和 ntfy 客户端
 2. 克隆该项目：
-   ```
-   git clone https://github.com/yourusername/ntf-cli.git
+   ```bash
+   git clone https://github.com/lawgk/ntf-cli.git
    ```
 3. 进入项目目录并安装依赖：
-   ```
+   ```bash
    cd ntf-cli
    go mod tidy
+   ```
+4. 构建二进制文件：
+   ```bash
+   go build -o ntf cmd/ntf/main.go
+   ```
+5. 移动到系统PATH目录（可选）：
+   ```bash
+   sudo mv ntf /usr/local/bin/
    ```
 
 ## 使用示例
@@ -35,20 +51,38 @@ ntf-cli 是一个简单的命令行工具，封装了 ntfy 客户端命令行工
 
 - 发送默认消息到默认主题：
 
-  ```
+  ```bash
   ntf
   ```
 
 - 发送带有时间参数的消息：
 
-  ```
+  ```bash
   ntf --in 30min
   ```
 
 - 发送自定义消息到默认主题：
 
-  ```
+  ```bash
   ntf "自定义消息"
+  ```
+
+- 发送带有标题的消息：
+
+  ```bash
+  ntf --title "标题" "消息内容"
+  ```
+
+- 发送带有优先级的消息：
+
+  ```bash
+  ntf --priority high "消息内容"
+  ```
+
+- 发送带有标签的消息：
+
+  ```bash
+  ntf --tags tag1,tag2 "消息内容"
   ```
 
 ## 配置

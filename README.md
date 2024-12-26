@@ -2,30 +2,47 @@
 
 [中文](README_zh.md) | English
 
-A simple command-line tool that wraps the ntfy client CLI tool to simplify the message sending process. This tool supports both Windows and Linux platforms.
+A simple command-line tool that wraps the ntfy client CLI tool to simplify the message sending process.
 
-## Features
-
-- Configure default topic and message
-- Send messages via simple command-line arguments
-- Rich message options support:
-  - Delayed sending (--in)
-  - Message title (--title)
-  - Message priority (--priority)
-  - Message tags (--tags)
-- Custom topic and message content support
+## Prerequisites
+- [ntfy client](https://docs.ntfy.sh/install/) must be installed and accessible from command line
 
 ## Installation
 
+### Windows
+1. Download `ntf.exe` from [Releases](https://github.com/lawgk/ntf-cli/releases)
+2. Add the binary location to your system PATH
+
+### Linux
+Option 1: Download from releases (Recommended)
+1. Download the latest `ntf` binary from [Releases](https://github.com/lawgk/ntf-cli/releases)
+2. Move the binary to `/usr/local/bin` and rename it to `ntf`:
+   ```bash
+   sudo mv ntf-cli /usr/local/bin/ntf
+   ```
+3. Make sure the binary is executable:
+   ```bash
+   sudo chmod +x /usr/local/bin/ntf
+   ```
+
+Option 2: Build from source
 1. Ensure Go environment and ntfy client are installed
 2. Clone this project:
    ```bash
-   git clone https://github.com/yourusername/ntf-cli.git
+   git clone https://github.com/lawgk/ntf-cli.git
    ```
 3. Enter project directory and install dependencies:
    ```bash
    cd ntf-cli
    go mod tidy
+   ```
+4. Build the binary:
+   ```bash
+   go build -o ntf cmd/ntf/main.go
+   ```
+5. Move to a directory in your PATH (optional):
+   ```bash
+   sudo mv ntf /usr/local/bin/
    ```
 
 ## Usage Examples
