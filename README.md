@@ -1,61 +1,63 @@
 # ntf-cli
 
-ntf-cli 是一个简单的命令行工具，封装了 ntfy 客户端命令行工具，旨在简化消息发送的过程。该工具支持在 Windows 和 Linux 平台上运行。
+[中文](README_zh.md) | English
 
-## 特性
+A simple command-line tool that wraps the ntfy client CLI tool to simplify the message sending process. This tool supports both Windows and Linux platforms.
 
-- 配置默认主题和默认消息
-- 通过简单的命令行参数发送消息
-- 支持丰富的消息选项：
-  - 延迟发送 (--in)
-  - 消息标题 (--title)
-  - 消息优先级 (--priority)
-  - 消息标签 (--tags)
-- 支持自定义主题和消息内容
+## Features
 
-## 安装
+- Configure default topic and message
+- Send messages via simple command-line arguments
+- Rich message options support:
+  - Delayed sending (--in)
+  - Message title (--title)
+  - Message priority (--priority)
+  - Message tags (--tags)
+- Custom topic and message content support
 
-1. 确保已安装 Go 语言环境和 ntfy 客户端
-2. 克隆该项目：
-   ```
+## Installation
+
+1. Ensure Go environment and ntfy client are installed
+2. Clone this project:
+   ```bash
    git clone https://github.com/yourusername/ntf-cli.git
    ```
-3. 进入项目目录并安装依赖：
-   ```
+3. Enter project directory and install dependencies:
+   ```bash
    cd ntf-cli
    go mod tidy
    ```
 
-## 使用示例
+## Usage Examples
 
-基本用法：
+Basic usage:
 
-- 发送默认消息到默认主题：
+- Send default message to default topic:
 
   ```
   ntf
   ```
 
-- 发送带有时间参数的消息：
+- Send message with time parameter:
 
   ```
   ntf --in 30min
   ```
 
-- 发送自定义消息到默认主题：
+- Send custom message to default topic:
 
   ```
-  ntf "自定义消息"
+  ntf "custom message"
   ```
 
-## 配置
+## Configuration
 
-配置文件会自动创建在以下位置：
+Configuration file will be automatically created at the following locations:
 
 - Windows: `%LOCALAPPDATA%\ntf-cli\config.json`
 - Linux/macOS: `~/.config/ntf-cli/config.json`
 
-配置文件格式(JSON)：
+Configuration file format (JSON):
 ```
 {
   "default_topic": "your_default_topic",
@@ -63,12 +65,12 @@ ntf-cli 是一个简单的命令行工具，封装了 ntfy 客户端命令行工
 }
 ```
 
-默认主题和消息可以在 `internal/config/config.go` 文件中进行设置。请根据需要修改该文件。
+Default topic and message can be set in the `internal/config/config.go` file. Please modify this file as needed.
 
-## 贡献
+## Contributing
 
-欢迎提交问题和贡献代码！请遵循贡献指南。
+Issues and contributions are welcome! Please follow the contribution guidelines.
 
-## 许可证
+## License
 
-该项目采用 MIT 许可证，详细信息请查看 LICENSE 文件。
+This project is licensed under the MIT License. See the LICENSE file for details.
