@@ -40,14 +40,14 @@ func SaveConfig(filePath string, config *Config) error {
 	return encoder.Encode(config)
 }
 
-// GetConfigPath 返回配置文件的完整路径
+// GetConfigPath returns the full path to the configuration file
 func GetConfigPath() (string, error) {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
 
-	// 根据操作系统确定配置文件路径
+	// Determine config file path based on operating system
 	var configPath string
 	if runtime.GOOS == "windows" {
 		configPath = filepath.Join(homeDir, "AppData", "Local", "ntf-cli", "config.json")
@@ -55,7 +55,7 @@ func GetConfigPath() (string, error) {
 		configPath = filepath.Join(homeDir, ".config", "ntf-cli", "config.json")
 	}
 
-	// 确保配置文件目录存在
+	// Ensure config directory exists
 	configDir := filepath.Dir(configPath)
 	err = os.MkdirAll(configDir, 0755)
 	if err != nil {

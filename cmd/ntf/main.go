@@ -11,16 +11,16 @@ import (
 )
 
 func main() {
-	// 获取配置文件路径
+	// Get config file path
 	configPath, err := config.GetConfigPath()
 	if err != nil {
-		log.Fatalf("无法获取配置文件路径: %v", err)
+		log.Fatalf("Failed to get config file path: %v", err)
 	}
 
-	// 加载配置
+	// Load configuration
 	cfg, err := config.LoadConfig(configPath)
 	if err != nil {
-		// 如果配置文件不存在，创建一个默认配置文件
+		// Create default config file if it doesn't exist
 		if os.IsNotExist(err) {
 			cfg = &config.Config{
 				DefaultTopic:   "default-topic",
@@ -28,17 +28,18 @@ func main() {
 			}
 			err = config.SaveConfig(configPath, cfg)
 			if err != nil {
-				log.Fatalf("无法创建默认配置文件: %v", err)
+				log.Fatalf("Failed to create default config file: %v", err)
 			}
-			fmt.Printf("已在 %s 创建默认配置文件\n", configPath)
+			fmt.Printf("Default config file created at %s\n", configPath)
 		} else {
-			log.Fatalf("无法加载配置: %v", err)
+			log.Fatalf("Failed to load configuration: %v", err)
 		}
 	}
 
-	// 定义命令行参数
+	// Define command line flags
 	flags := struct {
 		in       string
+		at       string // New at field
 		message  string
 		topic    string
 		title    string
@@ -46,31 +47,40 @@ func main() {
 		tags     string
 	}{}
 
-	flag.StringVar(&flags.in, "in", "", "设置消息的时间参数")
-	flag.StringVar(&flags.message, "msg", cfg.DefaultMessage, "要发送的消息")
-	flag.StringVar(&flags.topic, "topic", cfg.DefaultTopic, "要发送的主题")
-	flag.StringVar(&flags.title, "title", "", "消息标题")
-	flag.StringVar(&flags.priority, "priority", "", "消息优先级 (min|low|default|high|urgent)")
-	flag.StringVar(&flags.tags, "tags", "", "消息标签 (逗号分隔)")
+	// Add long and short format parameters
+	flag.StringVar(&flags.in, "in", "", "Set the message schedule time")
+	flag.StringVar(&flags.in, "i", "", "Set the message schedule time (shorthand)")
+	flag.StringVar(&flags.at, "at", "", "Set the message schedule time (same as --in)")
+	flag.StringVar(&flags.at, "a", "", "Set the message schedule time (same as -i)")
+	flag.StringVar(&flags.message, "msg", cfg.DefaultMessage, "Message content to send")
+	flag.StringVar(&flags.message, "m", cfg.DefaultMessage, "Message content to send (shorthand)")
+	flag.StringVar(&flags.topic, "topic", cfg.DefaultTopic, "Topic to publish to")
+	flag.StringVar(&flags.title, "title", "", "Message title")
+	flag.StringVar(&flags.title, "t", "", "Message title (shorthand)")
+	flag.StringVar(&flags.priority, "priority", "", "Message priority (min|low|default|high|urgent)")
+	flag.StringVar(&flags.priority, "p", "", "Message priority (shorthand)")
+	flag.StringVar(&flags.tags, "tags", "", "Message tags (comma-separated)")
 
 	flag.Parse()
 
-	// 创建ntfy客户端，使用命令行参数覆盖默认值
+	// Create ntfy client with command line parameters
 	client := ntfy.NewClient(flags.topic, flags.message)
 
-	// 如果没有提供任何参数，发送默认消息
+	// Send default message if no parameters provided
 	if len(os.Args) == 1 {
 		if err := client.SendMessage(nil); err != nil {
-			log.Fatalf("发送默认消息失败: %v", err)
+			log.Fatalf("Failed to send default message: %v", err)
 		}
-		fmt.Println("已发送默认消息")
+		fmt.Println("Default message sent")
 		return
 	}
 
-	// 收集所有非空选项
+	// Collect all non-empty options
 	options := make(map[string]string)
 	if flags.in != "" {
 		options["in"] = flags.in
+	} else if flags.at != "" {
+		options["at"] = flags.at
 	}
 	if flags.title != "" {
 		options["title"] = flags.title
@@ -82,7 +92,7 @@ func main() {
 		options["tags"] = flags.tags
 	}
 
-	// 根据是否有选项决定发送方式
+	// Decide sending method based on options
 	if len(options) > 0 {
 		err = client.SendWithOptions(options)
 	} else {

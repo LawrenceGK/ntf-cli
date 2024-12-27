@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-// Client 封装了ntfy客户端的调用
+// Client wraps the ntfy client CLI calls
 type Client struct {
 	DefaultTopic   string
 	DefaultMessage string
 }
 
-// NewClient 创建一个新的ntfy客户端
+// NewClient creates a new ntfy client instance
 func NewClient(defaultTopic, defaultMessage string) *Client {
 	return &Client{
 		DefaultTopic:   defaultTopic,
@@ -21,7 +21,7 @@ func NewClient(defaultTopic, defaultMessage string) *Client {
 	}
 }
 
-// SendMessage 发送消息到默认主题
+// SendMessage sends a message to the default topic
 func (c *Client) SendMessage(args []string) error {
 	message := c.DefaultMessage
 	if len(args) > 0 {
@@ -33,18 +33,18 @@ func (c *Client) SendMessage(args []string) error {
 	cmd.Stderr = os.Stderr
 
 	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("执行 ntfy 命令失败: %w", err)
+		return fmt.Errorf("failed to execute ntfy command: %w", err)
 	}
 	return nil
 }
 
-// SendWithOptions 发送带有选项的消息
+// SendWithOptions sends a message with additional options
 func (c *Client) SendWithOptions(options map[string]string) error {
-	// 预分配合适的切片容量
+	// Preallocate slice with appropriate capacity
 	cmdArgs := make([]string, 0, len(options)+3) // pub + options + topic + message
 	cmdArgs = append(cmdArgs, "pub")
 
-	// 为了确保参数顺序一致，可以按字母顺序排序（可选）
+	// Sort options by key for consistent order (optional)
 	for _, key := range []string{"in", "priority", "tags", "title"} {
 		if value, ok := options[key]; ok {
 			cmdArgs = append(cmdArgs, fmt.Sprintf("--%s=%s", key, value))
@@ -58,7 +58,7 @@ func (c *Client) SendWithOptions(options map[string]string) error {
 	cmd.Stderr = os.Stderr
 
 	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("执行 ntfy 命令失败: %w", err)
+		return fmt.Errorf("failed to execute ntfy command: %w", err)
 	}
 	return nil
 }

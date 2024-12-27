@@ -55,16 +55,37 @@ Basic usage:
   ntf
   ```
 
-- Send message with time parameter:
+- Send message with time parameter (supports both --in/-i and --at/-a):
 
   ```
-  ntf --in 30min
+  ntf -i 30min
+  # or
+  ntf -a 30min
   ```
 
 - Send custom message to default topic:
 
   ```
   ntf "custom message"
+  ```
+
+- Send message with title:
+  ```
+  ntf --title "Title" "message"
+  # or
+  ntf -t "Title" "message"
+  ```
+
+- Send message with priority:
+  ```
+  ntf --priority high "message"
+  # or
+  ntf -p high "message"
+  ```
+
+- Send message with tags:
+  ```
+  ntf --tags tag1,tag2 "message"
   ```
 
 ## Configuration
