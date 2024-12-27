@@ -39,7 +39,7 @@ func main() {
 	// Define command line flags
 	flags := struct {
 		in       string
-		at       string // New at field
+		at       string
 		message  string
 		topic    string
 		title    string
