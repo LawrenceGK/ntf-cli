@@ -29,7 +29,7 @@
 1. 确保已安装 Go 语言环境和 ntfy 客户端
 2. 克隆该项目：
    ```bash
-   git clone https://github.com/lawgk/ntf-cli.git
+   git clone https://github.com/lawrenceGK/ntf-cli.git
    ```
 3. 进入项目目录并安装依赖：
    ```bash

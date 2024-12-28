@@ -29,7 +29,7 @@ Option 2: Build from source
 1. Ensure Go environment and ntfy client are installed
 2. Clone this project:
    ```bash
-   git clone https://github.com/lawgk/ntf-cli.git
+   git clone https://github.com/lawrenceGK/ntf-cli.git
    ```
 3. Enter project directory and install dependencies:
    ```bash
