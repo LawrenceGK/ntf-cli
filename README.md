@@ -2,7 +2,7 @@
 
 [中文](README_zh.md) | English
 
-A simple command-line tool that wraps the ntfy client CLI tool to simplify the message sending process.
+A simple command-line tool that works with the ntfy client CLI tool to simplify the message sending process.
 
 ## Prerequisites
 - [ntfy client](https://docs.ntfy.sh/install/) must be installed and accessible from command line

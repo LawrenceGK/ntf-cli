@@ -2,7 +2,7 @@
 
 中文 | [English](README.md)
 
-一个简单的命令行工具，封装了 ntfy 客户端以简化消息发送流程。
+一个简单的命令行工具，与 ntfy 客户端配合使用以简化消息发送流程。
 
 ## 前置要求
 - 安装 [ntfy 客户端](https://docs.ntfy.sh/install/) 并确保可在命令行中使用
